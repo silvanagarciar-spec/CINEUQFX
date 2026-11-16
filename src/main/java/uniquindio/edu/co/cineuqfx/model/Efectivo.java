@@ -36,11 +36,6 @@ public class Efectivo implements MetodoPago, IPagarValorTotal, IGenerarFactura {
     }
 
     @Override
-    public double PagoInsuficienteException(double valorCompra) {
-        return 0;
-    }
-
-    @Override
     public void generarFactura() {
         System.out.println("📄 [Factura - Efectivo] Descuento: " + (Descuento * 100) + "%, Pago mínimo: $" + PAGO_MINIMO);
     }

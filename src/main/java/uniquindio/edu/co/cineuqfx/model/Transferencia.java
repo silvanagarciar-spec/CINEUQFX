@@ -36,11 +36,6 @@ public class Transferencia implements MetodoPago, IGenerarFactura, IPagarValorTo
     }
 
     @Override
-    public double PagoInsuficienteException(double valorCompra) {
-        return 0;
-    }
-
-    @Override
     public void generarFactura() {
         System.out.println("📄 [Factura - Transferencia] Recargo: " + (recargo * 100) + "%, Pago mínimo: $" + PAGO_MINIMO);
     }

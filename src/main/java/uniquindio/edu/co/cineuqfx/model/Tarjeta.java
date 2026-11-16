@@ -36,11 +36,6 @@ public class Tarjeta implements MetodoPago, IPagarValorTotal, IGenerarFactura {
     }
 
     @Override
-    public double PagoInsuficienteException(double valorCompra) {
-        return 0;
-    }
-
-    @Override
     public void generarFactura() {
         System.out.println("📄 [Factura - Tarjeta] Recargo: " + (recargo * 100) + "%, Pago mínimo: $" + PAGO_MINIMO);
     }

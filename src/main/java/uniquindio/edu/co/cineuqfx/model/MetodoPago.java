@@ -1,5 +1,5 @@
 package uniquindio.edu.co.cineuqfx.model;
 
-public interface git MetodoPago {
-    double calcularValorFinal(double valorCompra);
+public interface MetodoPago {
+    double calcularValorFinal(double valorCompra) throws SaldoInsuficienteException;
 }

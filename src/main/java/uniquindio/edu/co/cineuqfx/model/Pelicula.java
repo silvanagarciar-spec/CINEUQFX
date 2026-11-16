@@ -1,38 +1,55 @@
 package uniquindio.edu.co.cineuqfx.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Representa una película dentro del catálogo de CINEMAUQ.
+ */
 public class Pelicula {
-    public String nombrePelicula;
-    public int codigoPelicula;
-    public String genero;
-    public int duracionMinutos;
+    private String nombrePelicula;
+    private int codigoPelicula;
+    private String genero;
+    private int duracionMinutos;
     private EstadoPelicula estadoPelicula;
     private ClasificacionPelicula clasificacionPelicula;
-    private List<Pelicula> listSalaPeliculas;
+    private List<Sala> listSalaPelicula;
 
     /**
-     * Metodo constructor de pelicula
-     * @param nombrePelicula
-     * @param codigoPelicula
-     * @param genero
-     * @param duracionMinutos
-     * @param estadoPelicula
-     * @param clasificacionPelicula
-     * @param listSalaPeliculas
+     * Constructor de la clase Pelicula.
      */
-    public Pelicula(String nombrePelicula, int codigoPelicula, String genero, int duracionMinutos, EstadoPelicula estadoPelicula, ClasificacionPelicula clasificacionPelicula, List<Pelicula> listSalaPeliculas) {
+    public Pelicula(String nombrePelicula, int codigoPelicula, String genero, int duracionMinutos,
+                    ClasificacionPelicula clasificacionPelicula) {
         this.nombrePelicula = nombrePelicula;
         this.codigoPelicula = codigoPelicula;
         this.genero = genero;
         this.duracionMinutos = duracionMinutos;
-        this.estadoPelicula = estadoPelicula;
         this.clasificacionPelicula = clasificacionPelicula;
-        this.listSalaPeliculas = listSalaPeliculas;
+        this.estadoPelicula = EstadoPelicula.DISPONIBLE;
+        this.listSalaPelicula = new ArrayList<>();
     }
 
     /**
-     * Actualiza la información editable de la película usando sus variables exactas.
+     * Filtra y retorna la lista de películas que tienen estado DISPONIBLE.
+     *
+     * @param peliculas Lista completa de películas.
+     * @return Lista de películas disponibles.
+     */
+    public static List<Pelicula> visualizarPeliculasDisponibles(List<Pelicula> peliculas) {
+        List<Pelicula> disponibles = new ArrayList<>();
+        if (peliculas == null || peliculas.size() == 0) {
+            return disponibles;
+        }
+        for (int i = 0; i < peliculas.size(); i++) {
+            if (peliculas.get(i).getEstadoPelicula() == EstadoPelicula.DISPONIBLE) {
+                disponibles.add(peliculas.get(i));
+            }
+        }
+        return disponibles;
+    }
+
+    /**
+     * Modifica los atributos de la película.
      */
     public void actualizarInformacion(String nombrePelicula, String genero, int duracionMinutos, ClasificacionPelicula clasificacionPelicula) {
         this.nombrePelicula = nombrePelicula;
@@ -62,10 +79,7 @@ public class Pelicula {
         return this.estadoPelicula == EstadoPelicula.DISPONIBLE;
     }
 
-    /**
-     * getters y setters de clase pelicula
-     * @return
-     */
+    // Getters y Setters
     public String getNombrePelicula() {
         return nombrePelicula;
     }
@@ -114,12 +128,12 @@ public class Pelicula {
         this.clasificacionPelicula = clasificacionPelicula;
     }
 
-    public List<Pelicula> getListSalaPeliculas() {
-        return listSalaPeliculas;
+    public List<Sala> getListSalaPelicula() {
+        return listSalaPelicula;
     }
 
-    public void setListSalaPeliculas(List<Pelicula> listSalaPeliculas) {
-        this.listSalaPeliculas = listSalaPeliculas;
+    public void setListSalaPelicula(List<Sala> listSalaPelicula) {
+        this.listSalaPelicula = listSalaPelicula;
     }
 
     @Override
@@ -131,7 +145,7 @@ public class Pelicula {
                 ", duracionMinutos=" + duracionMinutos +
                 ", estadoPelicula=" + estadoPelicula +
                 ", clasificacionPelicula=" + clasificacionPelicula +
-                ", listSalaPeliculas=" + listSalaPeliculas +
+                ", listSalaPeliculas=" + listSalaPelicula +
                 '}';
     }
 }

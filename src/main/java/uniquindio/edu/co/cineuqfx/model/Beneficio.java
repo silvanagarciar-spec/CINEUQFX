@@ -11,6 +11,11 @@ public abstract class Beneficio {
     // METODO ABSTRACT: no tiene llaves porque cada hijo calcula el precio a su manera
     public abstract double aplicarBeneficio(double valorBase);
 
+    public class BeneficioNoValidoException extends RuntimeException {
+        public BeneficioNoValidoException(String mensaje) {
+            super(mensaje);
+        }
+    }
 
     //Getters y Setters
     public int getCodigoBeneficio() {
