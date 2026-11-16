@@ -1,6 +1,6 @@
 package uniquindio.edu.co.cineuqfx.model;
 
-public class Convenio {
+public class Convenio extends Beneficio {
     private String nombreEntidad;
     private TipoEntidad tipoEntidad;
     private double porcentajeDescuento;
@@ -15,7 +15,7 @@ public class Convenio {
     @Override
     public double aplicarBeneficio(double valorBase) {
         double descuento = valorBase * (porcentajeDescuento / 100.0);
-        return descuento;
+        return valorBase - descuento;
     }
     //Getters y Setters
     public String getNombreEntidad() {

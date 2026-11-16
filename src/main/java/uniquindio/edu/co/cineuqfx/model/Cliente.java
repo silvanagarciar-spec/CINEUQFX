@@ -7,11 +7,24 @@ public class Cliente {
     private String identificacion;
     private String nombre;
     private TipoCliente tipoCliente;
+    private Beneficio beneficio;
 
-    public Cliente(String identificacion, String nombre, TipoCliente tipoCliente) {
+    public Cliente(String identificacion, String nombre, TipoCliente tipoCliente, Beneficio beneficio) {
         this.identificacion = identificacion;
         this.nombre = nombre;
         this.tipoCliente = tipoCliente;
+        this.beneficio = beneficio;
+    }
+
+    public Cliente(String identificacion, String nombre, TipoCliente tipoCliente) {
+        this(identificacion, nombre, tipoCliente, null);
+    }
+
+    public double calcularValorConBeneficio(double valorBase) {
+        if (beneficio != null) {
+            return beneficio.aplicarBeneficio(valorBase);
+        }
+        return valorBase;
     }
 
     /**
@@ -100,5 +113,18 @@ public class Cliente {
 
     public void setTipoCliente(TipoCliente tipoCliente) {
         this.tipoCliente = tipoCliente;
+    }
+
+    public Beneficio getBeneficio() {
+        return beneficio;
+    }
+
+    public void setBeneficio(Beneficio beneficio) {
+        this.beneficio = beneficio;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " (" + identificacion + ") - " + tipoCliente;
     }
 }
