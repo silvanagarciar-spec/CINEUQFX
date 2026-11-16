@@ -9,23 +9,52 @@ public class Cliente {
     private String identificacion;
     private String nombre;
     private TipoCliente tipoCliente;
+    private Beneficio beneficio;
 
     /**
-     * Constructor de la clase Cliente.
+     * Constructor de la clase Cliente con beneficio asignado.
+     *
      * @param identificacion Número de identificación del cliente.
-     * @param nombre Nombre completo del cliente.
-     * @param tipoCliente Categoría o tipo de cliente.
+     * @param nombre         Nombre completo del cliente.
+     * @param tipoCliente    Categoría o tipo de cliente.
+     * @param beneficio      Beneficio asociado al cliente.
      */
-    public Cliente(String identificacion, String nombre, TipoCliente tipoCliente) {
+    public Cliente(String identificacion, String nombre, TipoCliente tipoCliente, Beneficio beneficio) {
         this.identificacion = identificacion;
         this.nombre = nombre;
         this.tipoCliente = tipoCliente;
+        this.beneficio = beneficio;
     }
 
     /**
-     * Verifica si el cliente ya existe en la lista de clientes registrados.
-     * @param clientes Lista de clientes del sistema.
-     * @return true si el cliente está registrado, false en caso contrario.
+     * Constructor de la clase Cliente sin beneficio inicial.
+     *
+     * @param identificacion Número de identificación del cliente.
+     * @param nombre         Nombre completo del cliente.
+     * @param tipoCliente    Categoría o tipo de cliente.
+     */
+    public Cliente(String identificacion, String nombre, TipoCliente tipoCliente) {
+        this(identificacion, nombre, tipoCliente, null);
+    }
+
+    /**
+     * Calcula el valor aplicando el beneficio del cliente si tiene uno asignado.
+     *
+     * @param valorBase Valor base sobre el cual se aplica el beneficio.
+     * @return Valor final después de aplicar el beneficio, o el valor base si no tiene.
+     */
+    public double calcularValorConBeneficio(double valorBase) {
+        if (beneficio != null) {
+            return beneficio.aplicarBeneficio(valorBase);
+        }
+        return valorBase;
+    }
+
+    /**
+     * Verifica si el cliente ya está registrado en la lista.
+     *
+     * @param clientes Lista de clientes registrados.
+     * @return true si el cliente existe en la lista, false en caso contrario.
      */
     public boolean verificarCliente(List<Cliente> clientes) {
         if (clientes == null || clientes.size() == 0) {
@@ -40,18 +69,24 @@ public class Cliente {
     }
 
     /**
-     * Registra el cliente en la lista si aún no se encuentra almacenado.
-     * @param clientes Lista de clientes del sistema.
+     * Registra el cliente si aún no existe; si ya está registrado lanza excepción.
+     *
+     * @param clientes Lista de clientes registrados.
      */
     public void registrarCliente(List<Cliente> clientes) {
-        if (clientes != null && !verificarCliente(clientes)) {
-            clientes.add(this);
+        if (clientes == null) {
+            return;
         }
+        if (verificarCliente(clientes)) {
+            throw new ClienteYaRegistradoException("El cliente con identificación " + this.identificacion + " ya está registrado.");
+        }
+        clientes.add(this);
     }
 
     /**
-     * Elimina el cliente de la lista si existe; de lo contrario lanza una excepción.
-     * @param clientes Lista de clientes del sistema.
+     * Elimina el cliente de la lista si existe; de lo contrario lanza excepción.
+     *
+     * @param clientes Lista de clientes registrados.
      */
     public void eliminarCliente(List<Cliente> clientes) {
         if (clientes == null || clientes.size() == 0) {
@@ -67,7 +102,8 @@ public class Cliente {
     }
 
     /**
-     * Actualiza o asciende la categoría del cliente.
+     * Cambia o asciende el tipo de cliente.
+     *
      * @param nuevoTipo Nuevo tipo de cliente asignado.
      */
     public void ascenderTipoCliente(TipoCliente nuevoTipo) {
@@ -76,8 +112,11 @@ public class Cliente {
         }
     }
 
+    // Getters y Setters
+
     /**
      * Obtiene la identificación del cliente.
+     *
      * @return Identificación del cliente.
      */
     public String getIdentificacion() {
@@ -86,7 +125,8 @@ public class Cliente {
 
     /**
      * Establece la identificación del cliente.
-     * @param identificacion Nueva identificación.
+     *
+     * @param identificacion Nueva identificación del cliente.
      */
     public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
@@ -94,6 +134,7 @@ public class Cliente {
 
     /**
      * Obtiene el nombre del cliente.
+     *
      * @return Nombre del cliente.
      */
     public String getNombre() {
@@ -102,7 +143,8 @@ public class Cliente {
 
     /**
      * Establece el nombre del cliente.
-     * @param nombre Nuevo nombre.
+     *
+     * @param nombre Nuevo nombre del cliente.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -110,6 +152,7 @@ public class Cliente {
 
     /**
      * Obtiene el tipo de cliente.
+     *
      * @return Tipo de cliente.
      */
     public TipoCliente getTipoCliente() {
@@ -118,6 +161,7 @@ public class Cliente {
 
     /**
      * Establece el tipo de cliente.
+     *
      * @param tipoCliente Nuevo tipo de cliente.
      */
     public void setTipoCliente(TipoCliente tipoCliente) {
@@ -125,7 +169,26 @@ public class Cliente {
     }
 
     /**
+     * Obtiene el beneficio asociado al cliente.
+     *
+     * @return Beneficio del cliente.
+     */
+    public Beneficio getBeneficio() {
+        return beneficio;
+    }
+
+    /**
+     * Establece el beneficio asociado al cliente.
+     *
+     * @param beneficio Nuevo beneficio del cliente.
+     */
+    public void setBeneficio(Beneficio beneficio) {
+        this.beneficio = beneficio;
+    }
+
+    /**
      * Devuelve la representación en texto del cliente.
+     *
      * @return Cadena con los datos del cliente.
      */
     @Override
