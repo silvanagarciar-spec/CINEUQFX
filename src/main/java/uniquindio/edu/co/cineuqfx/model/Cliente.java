@@ -26,8 +26,6 @@ public class Cliente {
      */
     public double calcularValorConBeneficio(double valorBase) {
         if (beneficio != null) {
-            // ¡Aquí ocurre la magia del polimorfismo!
-            // Java llama automáticamente al aplicarBeneficio() del hijo que corresponda
             return beneficio.aplicarBeneficio(valorBase);
         }
         return valorBase;
