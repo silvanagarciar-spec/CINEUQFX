@@ -11,6 +11,11 @@ public class Efectivo implements MetodoPago, IPagarValorTotal , IGenerarFactura{
     }
 
     @Override
+    public double PagoInsuficienteException(double valorCompra) {
+        return 0;
+    }
+
+    @Override
     public void generarFactura() {
 
     }
