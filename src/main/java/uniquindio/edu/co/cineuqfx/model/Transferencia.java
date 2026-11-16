@@ -8,6 +8,11 @@ public class Transferencia implements MetodoPago , IGenerarFactura , IPagarValor
     }
 
     @Override
+    public double PagoInsuficienteException(double valorCompra) {
+        return 0;
+    }
+
+    @Override
     public void generarFactura() {
 
     }
