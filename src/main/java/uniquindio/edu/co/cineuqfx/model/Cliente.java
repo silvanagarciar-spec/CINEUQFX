@@ -37,6 +37,7 @@ public class Cliente {
         this(identificacion, nombre, tipoCliente, null);
     }
 
+
     /**
      * Calcula el valor aplicando el beneficio del cliente si tiene uno asignado.
      *
@@ -49,6 +50,7 @@ public class Cliente {
         }
         return valorBase;
     }
+
 
     /**
      * Verifica si el cliente ya está registrado en la lista.
@@ -110,6 +112,18 @@ public class Cliente {
         if (nuevoTipo != null) {
             this.tipoCliente = nuevoTipo;
         }
+    }
+    /**
+     * Calcula el valor a pagar aplicando el beneficio si lo tiene
+     * Si no tiene beneficio, paga el valor base completo.
+     */
+    public double calcularValorConBeneficio(double valorBase) {
+        if (beneficio != null) {
+            // ¡Aquí ocurre la magia del polimorfismo!
+            // Java llama automáticamente al aplicarBeneficio() del hijo que corresponda
+            return beneficio.aplicarBeneficio(valorBase);
+        }
+        return valorBase;
     }
 
     // Getters y Setters
