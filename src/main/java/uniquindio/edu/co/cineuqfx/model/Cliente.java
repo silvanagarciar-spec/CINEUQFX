@@ -14,7 +14,11 @@ public class Cliente {
         this.tipoCliente = tipoCliente;
     }
 
-    // Verifica si el cliente ya está registrado en la lista
+    /**
+     *  Verifica si el cliente ya está registrado en la lista
+     * @param clientes
+     * @return
+     */
     public boolean verificarCliente(List<Cliente> clientes) {
         if (clientes == null || clientes.size() == 0) {
             return false;
@@ -27,7 +31,12 @@ public class Cliente {
         return false;
     }
 
-    // Registra el cliente si aún no existe
+    /**
+     * Registra el cliente si aún no existe
+     * @param clientes
+     * @return
+     */
+
     public boolean registrarCliente(List<Cliente> clientes) {
         if (clientes == null) {
             return false;
@@ -53,14 +62,22 @@ public class Cliente {
         return false;
     }
 
-    // Cambia o asciende el tipo de cliente
+    /**
+     * Cambia o asciende el tipo de cliente
+     * @param nuevoTipo
+     */
+
     public void ascenderTipoCliente(TipoCliente nuevoTipo) {
         if (nuevoTipo != null) {
             this.tipoCliente = nuevoTipo;
         }
     }
 
- //setters y getters
+    /**
+     * setters y getters
+     * @return
+     */
+
     public String getIdentificacion() {
         return identificacion;
     }
