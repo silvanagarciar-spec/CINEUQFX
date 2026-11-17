@@ -1,4 +1,4 @@
 package uniquindio.edu.co.cineuqfx.model;
 
-public class VentaEntrada {
+public class git VentaEntrada {
 }
