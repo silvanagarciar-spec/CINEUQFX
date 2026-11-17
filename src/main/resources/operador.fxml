@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="uniquindio.edu.co.cineuqfx.controller.OperadorController"
+            prefWidth="1100.0" prefHeight="700.0" styleClass="root-cine">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="header">
+            <padding>
+                <Insets top="14.0" right="20.0" bottom="14.0" left="20.0"/>
+            </padding>
+            <children>
+                <Label text="CINEMA UQ" styleClass="logo"/>
+                <Label text="Panel del operador" styleClass="subtitulo"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="lblUsuario" styleClass="subtitulo"/>
+                <Button text="Cerrar sesión" styleClass="boton-secundario" onAction="#onCerrarSesion"/>
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+
+                <!-- ===================== CARTELERA ===================== -->
+                <Tab text="Cartelera">
+                    <content>
+                        <BorderPane>
+                            <padding>
+                                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                            </padding>
+                            <top>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                    <BorderPane.margin>
+                                        <Insets bottom="12.0"/>
+                                    </BorderPane.margin>
+                                    <children>
+                                        <Label text="Películas disponibles" styleClass="seccion"/>
+                                        <Region HBox.hgrow="ALWAYS"/>
+                                        <Button text="Actualizar" styleClass="boton-secundario"
+                                                onAction="#onActualizarCartelera"/>
+                                    </children>
+                                </HBox>
+                            </top>
+                            <center>
+                                <TableView fx:id="tablaCartelera">
+                                    <columns>
+                                        <TableColumn fx:id="colCarCodigo" text="Código" prefWidth="70.0"/>
+                                        <TableColumn fx:id="colCarNombre" text="Nombre" prefWidth="260.0"/>
+                                        <TableColumn fx:id="colCarGenero" text="Género" prefWidth="160.0"/>
+                                        <TableColumn fx:id="colCarDuracion" text="Duración (min)" prefWidth="120.0"/>
+                                        <TableColumn fx:id="colCarClasificacion" text="Clasificación" prefWidth="140.0"/>
+                                    </columns>
+                                </TableView>
+                            </center>
+                        </BorderPane>
+                    </content>
+                </Tab>
+
+                <!-- ===================== CLIENTES ====================== -->
+                <Tab text="Clientes">
+                    <content>
+                        <BorderPane>
+                            <padding>
+                                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                            </padding>
+                            <left>
+                                <VBox spacing="8.0" prefWidth="270.0" styleClass="panel">
+                                    <padding>
+                                        <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                                    </padding>
+                                    <BorderPane.margin>
+                                        <Insets right="16.0"/>
+                                    </BorderPane.margin>
+                                    <children>
+                                        <Label text="Datos del cliente" styleClass="seccion"/>
+                                        <Label text="Identificación"/>
+                                        <TextField fx:id="txtCliId"/>
+                                        <Label text="Nombre"/>
+                                        <TextField fx:id="txtCliNombre"/>
+                                        <Label text="Tipo de cliente"/>
+                                        <ComboBox fx:id="cmbCliTipo" maxWidth="Infinity"/>
+                                        <Button text="Registrar cliente" maxWidth="Infinity" styleClass="boton-primario"
+                                                onAction="#onRegistrarCliente"/>
+                                        <Button text="Cambiar tipo del seleccionado" maxWidth="Infinity"
+                                                styleClass="boton-secundario" onAction="#onAscenderCliente"/>
+                                        <Button text="Eliminar seleccionado" maxWidth="Infinity"
+                                                styleClass="boton-peligro" onAction="#onEliminarCliente"/>
+                                        <Button text="Limpiar" maxWidth="Infinity" styleClass="boton-secundario"
+                                                onAction="#onLimpiarCliente"/>
+                                    </children>
+                                </VBox>
+                            </left>
+                            <center>
+                                <TableView fx:id="tablaClientes">
+                                    <columns>
+                                        <TableColumn fx:id="colCliId" text="Identificación" prefWidth="150.0"/>
+                                        <TableColumn fx:id="colCliNombre" text="Nombre" prefWidth="260.0"/>
+                                        <TableColumn fx:id="colCliTipo" text="Tipo" prefWidth="160.0"/>
+                                    </columns>
+                                </TableView>
+                            </center>
+                        </BorderPane>
+                    </content>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>

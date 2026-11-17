@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="uniquindio.edu.co.cineuqfx.controller.AdminController"
+            prefWidth="1100.0" prefHeight="700.0" styleClass="root-cine">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="header">
+            <padding>
+                <Insets top="14.0" right="20.0" bottom="14.0" left="20.0"/>
+            </padding>
+            <children>
+                <Label text="CINEMA UQ" styleClass="logo"/>
+                <Label text="Panel del administrador" styleClass="subtitulo"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="lblUsuario" styleClass="subtitulo"/>
+                <Button text="Cerrar sesión" styleClass="boton-secundario" onAction="#onCerrarSesion"/>
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+
+                <!-- ===================== PELÍCULAS ===================== -->
+                <Tab text="Películas">
+                    <content>
+                        <BorderPane>
+                            <padding>
+                                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                            </padding>
+                            <left>
+                                <VBox spacing="8.0" prefWidth="270.0" styleClass="panel">
+                                    <padding>
+                                        <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                                    </padding>
+                                    <BorderPane.margin>
+                                        <Insets right="16.0"/>
+                                    </BorderPane.margin>
+                                    <children>
+                                        <Label text="Datos de la película" styleClass="seccion"/>
+                                        <Label text="Código"/>
+                                        <TextField fx:id="txtPelCodigo"/>
+                                        <Label text="Nombre"/>
+                                        <TextField fx:id="txtPelNombre"/>
+                                        <Label text="Género"/>
+                                        <TextField fx:id="txtPelGenero"/>
+                                        <Label text="Duración (minutos)"/>
+                                        <TextField fx:id="txtPelDuracion"/>
+                                        <Label text="Clasificación"/>
+                                        <ComboBox fx:id="cmbPelClasificacion" maxWidth="Infinity"/>
+                                        <Button text="Registrar" maxWidth="Infinity" styleClass="boton-primario"
+                                                onAction="#onRegistrarPelicula"/>
+                                        <Button text="Guardar cambios" maxWidth="Infinity" styleClass="boton-secundario"
+                                                onAction="#onModificarPelicula"/>
+                                        <Button text="Deshabilitar" maxWidth="Infinity" styleClass="boton-peligro"
+                                                onAction="#onDeshabilitarPelicula"/>
+                                        <Button text="Habilitar" maxWidth="Infinity" styleClass="boton-secundario"
+                                                onAction="#onHabilitarPelicula"/>
+                                        <Button text="Limpiar" maxWidth="Infinity" styleClass="boton-secundario"
+                                                onAction="#onLimpiarPelicula"/>
+                                    </children>
+                                </VBox>
+                            </left>
+                            <center>
+                                <TableView fx:id="tablaPeliculas">
+                                    <columns>
+                                        <TableColumn fx:id="colPelCodigo" text="Código" prefWidth="70.0"/>
+                                        <TableColumn fx:id="colPelNombre" text="Nombre" prefWidth="220.0"/>
+                                        <TableColumn fx:id="colPelGenero" text="Género" prefWidth="140.0"/>
+                                        <TableColumn fx:id="colPelDuracion" text="Duración (min)" prefWidth="110.0"/>
+                                        <TableColumn fx:id="colPelClasificacion" text="Clasificación" prefWidth="120.0"/>
+                                        <TableColumn fx:id="colPelEstado" text="Estado" prefWidth="130.0"/>
+                                    </columns>
+                                </TableView>
+                            </center>
+                        </BorderPane>
+                    </content>
+                </Tab>
+
+                <!-- ======================= SALAS ======================= -->
+                <Tab text="Salas">
+                    <content>
+                        <BorderPane>
+                            <padding>
+                                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                            </padding>
+                            <left>
+                                <VBox spacing="8.0" prefWidth="270.0" styleClass="panel">
+                                    <padding>
+                                        <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                                    </padding>
+                                    <BorderPane.margin>
+                                        <Insets right="16.0"/>
+                                    </BorderPane.margin>
+                                    <children>
+                                        <Label text="Datos de la sala" styleClass="seccion"/>
+                                        <Label text="Código"/>
+                                        <TextField fx:id="txtSalaCodigo"/>
+                                        <Label text="Nombre"/>
+                                        <TextField fx:id="txtSalaNombre"/>
+                                        <Label text="Capacidad"/>
+                                        <TextField fx:id="txtSalaCapacidad"/>
+                                        <Label text="Número de asientos"/>
+                                        <TextField fx:id="txtSalaAsientos"/>
+                                        <Label text="Tipo de sala"/>
+                                        <ComboBox fx:id="cmbSalaTipo" maxWidth="Infinity"/>
+                                        <Button text="Registrar" maxWidth="Infinity" styleClass="boton-primario"
+                                                onAction="#onRegistrarSala"/>
+                                        <Button text="Guardar cambios" maxWidth="Infinity" styleClass="boton-secundario"
+                                                onAction="#onModificarSala"/>
+                                        <Button text="Deshabilitar (fuera de servicio)" maxWidth="Infinity"
+                                                styleClass="boton-peligro" onAction="#onDeshabilitarSala"/>
+                                        <Button text="Habilitar" maxWidth="Infinity" styleClass="boton-secundario"
+                                                onAction="#onHabilitarSala"/>
+                                        <Button text="Limpiar" maxWidth="Infinity" styleClass="boton-secundario"
+                                                onAction="#onLimpiarSala"/>
+                                    </children>
+                                </VBox>
+                            </left>
+                            <center>
+                                <TableView fx:id="tablaSalas">
+                                    <columns>
+                                        <TableColumn fx:id="colSalaCodigo" text="Código" prefWidth="70.0"/>
+                                        <TableColumn fx:id="colSalaNombre" text="Nombre" prefWidth="200.0"/>
+                                        <TableColumn fx:id="colSalaCapacidad" text="Capacidad" prefWidth="100.0"/>
+                                        <TableColumn fx:id="colSalaAsientos" text="Asientos" prefWidth="100.0"/>
+                                        <TableColumn fx:id="colSalaTipo" text="Tipo" prefWidth="120.0"/>
+                                        <TableColumn fx:id="colSalaEstado" text="Estado" prefWidth="150.0"/>
+                                    </columns>
+                                </TableView>
+                            </center>
+                        </BorderPane>
+                    </content>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>
