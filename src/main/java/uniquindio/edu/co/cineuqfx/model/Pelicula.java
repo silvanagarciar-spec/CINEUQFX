@@ -50,10 +50,14 @@ public class Pelicula {
      * Cambia el estado de la película a DISPONIBLE.
      */
     public void habilitar() {
-            this.estadoPelicula = EstadoPelicula.DISPONIBLE;
-
         this.estadoPelicula = EstadoPelicula.DISPONIBLE;
-        this.listSalaPelicula = new ArrayList<>();
+    }
+
+    /**
+     * Verifica si la película está disponible.
+     */
+    public boolean estaDisponible() {
+        return this.estadoPelicula == EstadoPelicula.DISPONIBLE;
     }
 
     /**
