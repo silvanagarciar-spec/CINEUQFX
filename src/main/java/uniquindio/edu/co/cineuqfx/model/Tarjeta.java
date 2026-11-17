@@ -1,17 +1,29 @@
 package uniquindio.edu.co.cineuqfx.model;
 
 public class Tarjeta implements MetodoPago, IPagarValorTotal, IGenerarFactura {
-
+    /**
+     * Constantes para la interface
+     */
     private static final int PAGO_MINIMO = 100000;
     private double recargo = 0.30;
 
     public Tarjeta() {
     }
 
+    /**
+     * metodo constructor
+     * @param recargo
+     */
     public Tarjeta(double recargo) {
         this.recargo = recargo;
     }
 
+    /**
+     * Metodo para calcula el valor final
+     * @param valorCompra
+     * @return valor total de la compra mas el recargo
+     * @throws SaldoInsuficienteException
+     */
     @Override
     public double calcularValorFinal(double valorCompra) throws SaldoInsuficienteException {
         if (valorCompra < PAGO_MINIMO) {
@@ -23,6 +35,11 @@ public class Tarjeta implements MetodoPago, IPagarValorTotal, IGenerarFactura {
         return valorCompra + (valorCompra * recargo);
     }
 
+    /**
+     * Metodo para verificar el pago dedl valor total
+     * @param valor
+     * @throws SaldoInsuficienteException
+     */
     @Override
     public void pagarValorTotal(double valor) throws SaldoInsuficienteException {
         if (valor < PAGO_MINIMO) {
@@ -35,6 +52,9 @@ public class Tarjeta implements MetodoPago, IPagarValorTotal, IGenerarFactura {
                 valor, recargo * 100);
     }
 
+    /**
+     * Metodo para generar la factura
+     */
     @Override
     public void generarFactura() {
         System.out.println("📄 [Factura - Tarjeta] Recargo: " + (recargo * 100) + "%, Pago mínimo: $" + PAGO_MINIMO);
