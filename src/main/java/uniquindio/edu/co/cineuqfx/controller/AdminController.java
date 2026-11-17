@@ -126,8 +126,7 @@ public class AdminController {
             if (clasif == null) {
                 throw new IllegalArgumentException("Selecciona una clasificación.");
             }
-            cine.registrarPelicula(new Pelicula(nombre, codigo, genero, duracion,
-                    EstadoPelicula.DISPONIBLE, clasif, new ArrayList<>()));
+            cine.registrarPelicula(new Pelicula(nombre, codigo, genero, duracion, clasif));
             refrescarPeliculas();
             onLimpiarPelicula();
             Alertas.info("Película registrada correctamente.");

@@ -52,11 +52,12 @@ public final class AppContext {
                 new ArrayList<>(), new ArrayList<>());
         try {
             cine.registrarPelicula(new Pelicula("Oppenheimer", 1, "Drama", 180,
-                    EstadoPelicula.DISPONIBLE, ClasificacionPelicula.MAYORES_15, new ArrayList<>()));
+                    ClasificacionPelicula.MAYORES_15));
             cine.registrarPelicula(new Pelicula("Intensamente 2", 2, "Animación", 96,
-                    EstadoPelicula.DISPONIBLE, ClasificacionPelicula.TODOS, new ArrayList<>()));
+                    ClasificacionPelicula.TODOS));
             cine.registrarPelicula(new Pelicula("Dune: Parte Dos", 3, "Ciencia ficción", 166,
-                    EstadoPelicula.NO_DISPONIBLE, ClasificacionPelicula.MAYORES_12, new ArrayList<>()));
+                    ClasificacionPelicula.MAYORES_12));
+            cine.deshabilitarPelicula(3); // la película nace DISPONIBLE; esta la dejamos NO_DISPONIBLE de ejemplo
 
             cine.registrarSala(new Sala(1, "Sala 1", 80, 80, EstadoSala.DISPONIBLE,
                     TipoSala.TRADICIONAL, new ArrayList<>()));
@@ -65,7 +66,11 @@ public final class AppContext {
         } catch (Exception e) {
             throw new IllegalStateException("Error cargando datos de prueba", e);
         }
-        new Cliente("1001", "Ana Gómez", TipoCliente.ESTUDIANTE).registrarCliente(cine.getListCineUqCliente());
+        try {
+            new Cliente("1001", "Ana Gómez", TipoCliente.ESTUDIANTE).registrarCliente(cine.getListCineUqCliente());
+        } catch (RuntimeException e) {
+            throw new IllegalStateException("Error cargando datos de prueba", e);
+        }
         return cine;
     }
 }

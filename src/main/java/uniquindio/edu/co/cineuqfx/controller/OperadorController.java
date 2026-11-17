@@ -97,13 +97,13 @@ public class OperadorController {
             Alertas.advertencia("Completa identificación, nombre y tipo de cliente.");
             return;
         }
-        Cliente nuevo = new Cliente(id, nombre, tipo);
-        if (nuevo.registrarCliente(cine.getListCineUqCliente())) {
+        try {
+            new Cliente(id, nombre, tipo).registrarCliente(cine.getListCineUqCliente());
             refrescarClientes();
             onLimpiarCliente();
             Alertas.info("Cliente registrado correctamente.");
-        } else {
-            Alertas.error("Ya existe un cliente con la identificación " + id + ".");
+        } catch (RuntimeException e) { // ClienteYaRegistradoException
+            Alertas.error(e.getMessage());
         }
     }
 
@@ -127,9 +127,13 @@ public class OperadorController {
             return;
         }
         if (Alertas.confirmar("¿Eliminar a " + seleccionado.getNombre() + "?")) {
-            seleccionado.eliminarCliente(cine.getListCineUqCliente());
-            refrescarClientes();
-            onLimpiarCliente();
+            try {
+                seleccionado.eliminarCliente(cine.getListCineUqCliente());
+                refrescarClientes();
+                onLimpiarCliente();
+            } catch (RuntimeException e) { // ClienteNoEncontradoException
+                Alertas.error(e.getMessage());
+            }
         }
     }
 
