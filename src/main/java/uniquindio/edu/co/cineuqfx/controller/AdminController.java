@@ -28,7 +28,9 @@ public class AdminController {
 
     @FXML private Label lblUsuario;
 
-    // ---------- Películas ----------
+    /**
+     * Peliculas
+     */
     @FXML private TextField txtPelCodigo;
     @FXML private TextField txtPelNombre;
     @FXML private TextField txtPelGenero;
@@ -42,7 +44,9 @@ public class AdminController {
     @FXML private TableColumn<Pelicula, String> colPelClasificacion;
     @FXML private TableColumn<Pelicula, String> colPelEstado;
 
-    // ---------- Salas ----------
+    /**
+     * Salas
+     */
     @FXML private TextField txtSalaCodigo;
     @FXML private TextField txtSalaNombre;
     @FXML private TextField txtSalaCapacidad;
@@ -61,7 +65,9 @@ public class AdminController {
     private void initialize() {
         lblUsuario.setText("Sesión: " + AppContext.getUsuarioActual());
 
-        // --- Tabla de películas ---
+        /**
+         * Tabla pelicula
+         */
         colPelCodigo.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getCodigoPelicula())));
         colPelNombre.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNombrePelicula()));
         colPelGenero.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getGenero()));
@@ -80,7 +86,9 @@ public class AdminController {
             }
         });
 
-        // --- Tabla de salas ---
+        /**
+         * tabla de sala
+         */
         colSalaCodigo.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getCodigoSala())));
         colSalaNombre.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNombreSala()));
         colSalaCapacidad.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getCapacidadSala())));
@@ -103,9 +111,9 @@ public class AdminController {
         refrescarSalas();
     }
 
-    // =====================================================================
-    //  PELÍCULAS
-    // =====================================================================
+    /**
+     * PELICULAS
+     */
 
     @FXML
     private void onRegistrarPelicula() {
@@ -189,9 +197,9 @@ public class AdminController {
         tablaPeliculas.refresh();
     }
 
-    // =====================================================================
-    //  SALAS
-    // =====================================================================
+    /**
+     * SALAS
+     */
 
     @FXML
     private void onRegistrarSala() {
@@ -275,10 +283,10 @@ public class AdminController {
         tablaSalas.refresh();
     }
 
-    // =====================================================================
-    //  Sesión y utilidades
-    // =====================================================================
-
+    /**
+     * sesion y utilidades
+     * @param evento
+     */
     @FXML
     private void onCerrarSesion(ActionEvent evento) {
         AppContext.cerrarSesion();

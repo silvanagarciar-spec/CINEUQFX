@@ -28,7 +28,9 @@ public class OperadorController {
 
     @FXML private Label lblUsuario;
 
-    // ---------- Cartelera ----------
+    /**
+     * Cartelera
+     */
     @FXML private TableView<Pelicula> tablaCartelera;
     @FXML private TableColumn<Pelicula, String> colCarCodigo;
     @FXML private TableColumn<Pelicula, String> colCarNombre;
@@ -36,7 +38,9 @@ public class OperadorController {
     @FXML private TableColumn<Pelicula, String> colCarDuracion;
     @FXML private TableColumn<Pelicula, String> colCarClasificacion;
 
-    // ---------- Clientes ----------
+    /**
+     * Clientes
+     */
     @FXML private TextField txtCliId;
     @FXML private TextField txtCliNombre;
     @FXML private ComboBox<TipoCliente> cmbCliTipo;
@@ -71,18 +75,18 @@ public class OperadorController {
         refrescarClientes();
     }
 
-    // =====================================================================
-    //  CARTELERA
-    // =====================================================================
+    /**
+     * Cartelera
+     */
 
     @FXML
     private void onActualizarCartelera() {
         tablaCartelera.setItems(FXCollections.observableArrayList(cine.consultarPeliculasDisponibles()));
     }
 
-    // =====================================================================
-    //  CLIENTES
-    // =====================================================================
+    /**
+     * Clientes
+     */
 
     @FXML
     private void onRegistrarCliente() {
@@ -142,7 +146,6 @@ public class OperadorController {
         tablaClientes.refresh();
     }
 
-    // =====================================================================
 
     @FXML
     private void onCerrarSesion(ActionEvent evento) {

@@ -15,11 +15,14 @@ public class LoginController {
     @FXML private Label lblError;
     @FXML private Button btnIngresar;
 
-    // ---------------------------------------------------------------------
-    // TEMPORAL: su diagrama UML no tiene (todavía) las clases Administrador /
-    // Operador, así que las credenciales están aquí. Cuando existan esas
-    // clases, reemplacen autenticar() por una llamada a su lógica.
-    // ---------------------------------------------------------------------
+    /**
+     * TEMPORAL: su diagrama UML no tiene (todavía) las clases Administrador /
+     *     // Operador, así que las credenciales están aquí. Cuando existan esas
+     *     // clases, reemplacen autenticar() por una llamada a su lógica.
+     * @param usuario
+     * @param clave
+     * @return
+     */
     private AppContext.Rol autenticar(String usuario, String clave) {
         if (usuario.equals("admin") && clave.equals("admin123")) {
             return AppContext.Rol.ADMINISTRADOR;
