@@ -7,9 +7,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Pruebas unitarias para la clase: Sala.java
- */
+
 public class SalaTest {
 
     @Test

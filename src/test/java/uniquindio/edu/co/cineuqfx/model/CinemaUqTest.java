@@ -10,9 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CinemaUqTest {
-    /**
-     * Pruebas unitarias para la clase: Pelicula.java
-     */
+
     @Nested
     public class PeliculaTest {
 

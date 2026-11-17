@@ -9,9 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Pruebas unitarias para la clase: VentaEntrada.java
- */
+
 public class VentaEntradaTest {
 
     private Funcion funcion;

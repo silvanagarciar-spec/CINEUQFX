@@ -5,9 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-    /**
-     * Pruebas unitarias para la clase: Transferencia.java
-     */
+
     class TransferenciaTest {
 
         private Transferencia transferencia;

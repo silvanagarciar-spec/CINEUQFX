@@ -11,9 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Pruebas unitarias para la clase: Funcion.java
- */
+
 public class FuncionTest {
 
     private Funcion funcion;

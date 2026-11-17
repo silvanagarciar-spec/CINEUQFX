@@ -41,23 +41,23 @@ public class MembresiaTest {
     @Test
     @DisplayName("TC-MEM-04: Canje de puntos y cálculo de descuento (500 por cada 100, y +2000 si > 1000)")
     void testDescuentoYCanjePuntos() {
-        // Menos de 100 puntos no da descuento
+
         Membresia mPocos = new Membresia(7, "Pocos", 80, NivelMembresia.BRONCE);
         assertEquals(0.0, mPocos.calcularDescuentoPorPuntos(), 0.001);
 
-        // 250 puntos -> 2 bloques de 100 = $1.000 COP
+
         Membresia m200 = new Membresia(8, "Media", 250, NivelMembresia.PLATA);
         assertEquals(1000.0, m200.calcularDescuentoPorPuntos(), 0.001);
 
-        // 1200 puntos -> 12 bloques de 100 ($6.000) + $2.000 extra por superar 1000 = $8.000 COP
+
         Membresia m1200 = new Membresia(9, "Muchas", 1200, NivelMembresia.ORO);
         assertEquals(8000.0, m1200.calcularDescuentoPorPuntos(), 0.001);
 
-        // Canje de puntos descuenta del saldo
+
         m1200.canjearPuntos(1200);
         assertEquals(0, m1200.getPuntosAcumulados());
 
-        // Intentar canjear más puntos de los que tiene lanza excepción
+
         assertThrows(BeneficioNoValidoException.class, () -> m1200.canjearPuntos(50));
     }
 }

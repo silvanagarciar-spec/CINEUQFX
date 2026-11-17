@@ -10,9 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 
-    /**
-     * Pruebas unitarias para la clase: Pelicula.java
-     */
+
     public class PeliculaTest {
 
         @Test

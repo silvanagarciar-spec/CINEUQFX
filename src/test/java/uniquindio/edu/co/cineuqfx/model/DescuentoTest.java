@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DescuentoTest {
 
+
     @Test
     @DisplayName("TC-DESC-01: Aplicar descuento con porcentaje personalizado")
     void testAplicarDescuentoPersonalizado() {

@@ -7,9 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class TarjetaTest {
 
-        /**
-         * Pruebas unitarias para la clase: Tarjeta.java
-         */
+
         private Tarjeta tarjeta;
 
         @BeforeEach
