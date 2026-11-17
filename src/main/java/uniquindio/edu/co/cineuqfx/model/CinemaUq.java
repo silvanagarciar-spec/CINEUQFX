@@ -15,14 +15,14 @@ public class CinemaUq {
 
     /**
      * Metodo constructror de Cinema uq
-     * @param nombreComercial
-     * @param nit
-     * @param direccion
-     * @param listCineUqPeliculas
-     * @param listCineUqSalas
-     * @param listCineUqFunciones
-     * @param listCineUqVentaEntradas
-     * @param listCineUqCliente
+     * @param nombreComercial nombre completo del cine
+     * @param nit nit del cine
+     * @param direccion direccion del cine
+     * @param listCineUqPeliculas listas del cine
+     * @param listCineUqSalas listas del cine
+     * @param listCineUqFunciones listas del cine
+     * @param listCineUqVentaEntradas listas del cine
+     * @param listCineUqCliente listas del cine
      */
     public CinemaUq(String nombreComercial, int nit, String direccion, List<Pelicula> listCineUqPeliculas, List<Sala> listCineUqSalas, List<Funcion> listCineUqFunciones, List<VentaEntrada> listCineUqVentaEntradas, List<Cliente> listCineUqCliente) {
         this.nombreComercial = nombreComercial;
@@ -37,8 +37,8 @@ public class CinemaUq {
 
 
     /**
-     * registrar pelicula
-     * @param nuevaPelicula
+     * Metodo para registrar pelicula
+     * @param nuevaPelicula registrar nueva pelicula
      * @throws Exception
      */
     public void registrarPelicula(Pelicula nuevaPelicula) throws Exception {
@@ -48,6 +48,11 @@ public class CinemaUq {
         this.listCineUqPeliculas.add(nuevaPelicula);
     }
 
+    /**
+     * Metodo para buscar pelicula por codigo
+     * @param codigoPelicula codigo de la pelicula
+     * @return
+     */
     public Pelicula buscarPeliculaPorCodigo(int codigoPelicula) {
         for (Pelicula p : this.listCineUqPeliculas) {
             if (p.getCodigoPelicula() == codigoPelicula) {
@@ -57,6 +62,15 @@ public class CinemaUq {
         return null;
     }
 
+    /**
+     * Metodo para modificar pelicula
+     * @param codigoPelicula codigo de la pelicula
+     * @param nombrePelicula nombre de la pelicula
+     * @param genero genero de la pelicula
+     * @param duracionMinutos duracion de la pelicula
+     * @param clasificacionPelicula  clasificacion de la pelicula
+     * @throws Exception excepcion para saber si no se encontro la pelicula con el codigo
+     */
     public void modificarPelicula(int codigoPelicula, String nombrePelicula, String genero,
                                   int duracionMinutos, ClasificacionPelicula clasificacionPelicula) throws Exception {
         Pelicula pelicula = buscarPeliculaPorCodigo(codigoPelicula);
@@ -66,6 +80,11 @@ public class CinemaUq {
         pelicula.actualizarInformacion(nombrePelicula, genero, duracionMinutos, clasificacionPelicula);
     }
 
+    /**
+     * Metodo para deshabilitar la pelicula
+     * @param codigoPelicula codigo de la pelicula
+     * @throws Exception
+     */
     public void deshabilitarPelicula(int codigoPelicula) throws Exception {
         Pelicula pelicula = buscarPeliculaPorCodigo(codigoPelicula);
         if (pelicula == null) {
@@ -74,6 +93,10 @@ public class CinemaUq {
         pelicula.deshabilitar();
     }
 
+    /**
+     * metodo para consultar la disponibilidad de la pelicula
+     * @return
+     */
     public List<Pelicula> consultarPeliculasDisponibles() {
         List<Pelicula> disponibles = new java.util.ArrayList<>();
         for (Pelicula p : this.listCineUqPeliculas) {
@@ -86,8 +109,8 @@ public class CinemaUq {
 
 
     /**
-     * registrar sala
-     * @param nuevaSala
+     * Metodo para registrar sala
+     * @param nuevaSala crear nueva sala
      * @throws Exception
      */
     public void registrarSala(Sala nuevaSala) throws Exception {
@@ -97,6 +120,11 @@ public class CinemaUq {
         this.listCineUqSalas.add(nuevaSala);
     }
 
+    /**
+     * Metodo para buscar sala
+     * @param codigoSala codigo de la sala
+     * @return
+     */
     public Sala buscarSalaPorCodigo(int codigoSala) {
         for (Sala s : this.listCineUqSalas) {
             if (s.getCodigoSala() == codigoSala) {
@@ -106,6 +134,15 @@ public class CinemaUq {
         return null;
     }
 
+    /**
+     * Metodo para modificar sala
+     * @param codigoSala codigo de la sala
+     * @param nombreSala nombre de la sala
+     * @param capacidadSala  capacidad de la sala
+     * @param nAsientos Numero de la sala
+     * @param tipoSala tipo de la sala
+     * @throws Exception si no se encuentra la sala con codigo
+     */
     public void modificarSala(int codigoSala, String nombreSala, int capacidadSala, int nAsientos, TipoSala tipoSala) throws Exception {
         Sala sala = buscarSalaPorCodigo(codigoSala);
         if (sala == null) {
@@ -114,6 +151,11 @@ public class CinemaUq {
         sala.actualizarInformacion(nombreSala, capacidadSala, nAsientos, tipoSala);
     }
 
+    /**
+     * Metodo para deshabilitar la sala
+     * @param codigoSala de la sala
+     * @throws Exception
+     */
     public void deshabilitarSala(int codigoSala) throws Exception {
         Sala sala = buscarSalaPorCodigo(codigoSala);
         if (sala == null) {
@@ -123,7 +165,7 @@ public class CinemaUq {
     }
 
     /**
-     * Registra una función validando que la película y la sala existan y estén disponibles.
+     * Metodo para registrar una función validando que la película y la sala existan y estén disponibles.
      */
     public void agregarFuncion(Funcion funcion, int codigoPelicula, int codigoSala) throws Exception {
         Pelicula pelicula = buscarPeliculaPorCodigo(codigoPelicula);
@@ -142,6 +184,10 @@ public class CinemaUq {
         this.listCineUqFunciones.add(funcion);
     }
 
+    /**
+     * Metodo para agregar una venta
+     * @param venta agrefar una venta
+     */
     public void agregarVentaEntrada(VentaEntrada venta) {
         this.listCineUqVentaEntradas.add(venta);
     }
@@ -153,10 +199,7 @@ public class CinemaUq {
     }
 
 
-    /**
-     * getters y setters de cinema uq
-     * @return
-     */
+
     public String getNombreComercial() {
         return nombreComercial;
     }

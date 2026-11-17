@@ -12,6 +12,12 @@ public class Efectivo implements MetodoPago, IPagarValorTotal, IGenerarFactura {
         this.Descuento = descuento;
     }
 
+    /**
+     * metodo para calcular el valor final
+     * @param valorCompra valor de la compra
+     * @return
+     * @throws SaldoInsuficienteException saldo insufienciente
+     */
     @Override
     public double calcularValorFinal(double valorCompra) throws SaldoInsuficienteException {
         if (valorCompra < PAGO_MINIMO) {
@@ -23,6 +29,10 @@ public class Efectivo implements MetodoPago, IPagarValorTotal, IGenerarFactura {
         return valorCompra - (valorCompra * Descuento);
     }
 
+    /**
+     * Metodo para calcular el valor minimo
+     * @throws SaldoInsuficienteException saldo insuficiente excepcion
+     */
     @Override
     public void pagarValorTotal(double valor) throws SaldoInsuficienteException {
         if (valor < PAGO_MINIMO) {
@@ -35,6 +45,9 @@ public class Efectivo implements MetodoPago, IPagarValorTotal, IGenerarFactura {
                 valor, Descuento * 100);
     }
 
+    /**
+     * metodo para generar la factura
+     */
     @Override
     public void generarFactura() {
         System.out.println("📄 [Factura - Efectivo] Descuento: " + (Descuento * 100) + "%, Pago mínimo: $" + PAGO_MINIMO);

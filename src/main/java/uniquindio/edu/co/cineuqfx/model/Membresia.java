@@ -1,13 +1,17 @@
 package uniquindio.edu.co.cineuqfx.model;
 
-/**
- * Beneficio de Membresía de cliente (BRONCE: 10%, PLATA: 20%, ORO: 30% de descuento)
- * con acumulación de puntos por compras.
- */
+
 public class Membresia extends Beneficio {
     private int puntosAcumulados;
     private NivelMembresia nivel;
 
+    /**
+     * Metodo constructor
+     * @param codigoBeneficio codigo del beneficio
+     * @param nombreBeneficio nombre del beneficio
+     * @param puntosAcumulados puntos acumulados
+     * @param nivel de la membresia
+     */
     public Membresia(int codigoBeneficio, String nombreBeneficio, int puntosAcumulados, NivelMembresia nivel) {
         super(codigoBeneficio, nombreBeneficio);
         if (puntosAcumulados < 0) {
@@ -24,6 +28,11 @@ public class Membresia extends Beneficio {
         this(codigoBeneficio, nombreBeneficio, 0, nivel);
     }
 
+    /**
+     * Metodo para aplicar el beneficio
+     * @param valorBase de la entrada.
+     * @return
+     */
     @Override
     public double aplicarBeneficio(double valorBase) {
         if (valorBase <= 0) {
@@ -43,7 +52,7 @@ public class Membresia extends Beneficio {
     }
 
     /**
-     * Acumula puntos a la membresía por compras de boletos o servicios.
+     * Metodo para Acumular puntos a la membresía por compras de boletos o servicios.
      * @param puntos Cantidad de puntos a sumar.
      */
     public void acumularPuntos(int puntos) {
@@ -53,7 +62,7 @@ public class Membresia extends Beneficio {
         this.puntosAcumulados += puntos;
     }
 
-    /**
+    /**metodo para canjear puntos
      * Canjea o descuenta puntos de la membresía.
      * @param puntos Cantidad de puntos a redimir.
      */
@@ -68,11 +77,8 @@ public class Membresia extends Beneficio {
     }
 
     /**
-     * Calcula el descuento en dinero obtenido por canjear los puntos acumulados:
-     * - $500 COP de descuento por cada 100 puntos.
-     * - Si tiene más de 1000 puntos, se le descuentan $2.000 COP adicionales al total de la compra.
+     * Metodo para Calcular el descuento en dinero obtenido por canjear los puntos acumulados:
      *
-     * @return Valor del descuento por puntos en pesos colombianos.
      */
     public double calcularDescuentoPorPuntos() {
         if (this.puntosAcumulados < 100) {
@@ -86,7 +92,7 @@ public class Membresia extends Beneficio {
         return descuento;
     }
 
-    // Getters y Setters
+
     public int getPuntosAcumulados() {
         return puntosAcumulados;
     }

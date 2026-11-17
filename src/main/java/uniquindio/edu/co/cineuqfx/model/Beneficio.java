@@ -1,12 +1,15 @@
 package uniquindio.edu.co.cineuqfx.model;
 
-/**
- * Clase base abstracta para los beneficios que puede tener un cliente en Cinema UQ.
- */
+
 public abstract class Beneficio {
     private int codigoBeneficio;
     private String nombreBeneficio;
 
+    /**
+     * Metodo constructor de la clase beneficio
+     * @param codigoBeneficio codigo del beneficio
+     * @param nombreBeneficio codigo del beneficio
+     */
     public Beneficio(int codigoBeneficio, String nombreBeneficio) {
         if (codigoBeneficio <= 0) {
             throw new BeneficioNoValidoException("El código del beneficio debe ser un número positivo.");
@@ -19,13 +22,13 @@ public abstract class Beneficio {
     }
 
     /**
-     * Aplica el beneficio sobre el valor base de la entrada.
-     * @param valorBase Valor base de la entrada.
-     * @return Valor con el beneficio aplicado.
+     * Metodo para aplicar el beneficio sobre el valor base de la entrada.
+     * @param valorBase de la entrada.
+     * @return
      */
     public abstract double aplicarBeneficio(double valorBase);
 
-    // Getters y Setters
+
     public int getCodigoBeneficio() {
         return codigoBeneficio;
     }

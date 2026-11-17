@@ -1,13 +1,19 @@
 package uniquindio.edu.co.cineuqfx.model;
 
-/**
- * Beneficio por convenio institucional (universidades, cajas de compensación, etc.).
- */
+
 public class Convenio extends Beneficio {
     private String nombreEntidad;
     private TipoEntidad tipoEntidad;
     private double porcentajeDescuento;
 
+    /**
+     * Metodo Constructor de la clase convenio
+     * @param codigoBeneficio codigo del beneficio
+     * @param nombreBeneficio  nombre del beneficio
+     * @param nombreEntidad nombre de la entidad
+     * @param tipoEntidad tipo de entidad
+     * @param porcentajeDescuento porcentage del descuento
+     */
     public Convenio(int codigoBeneficio, String nombreBeneficio, String nombreEntidad, TipoEntidad tipoEntidad, double porcentajeDescuento) {
         super(codigoBeneficio, nombreBeneficio);
         if (nombreEntidad == null || nombreEntidad.trim().isEmpty()) {
@@ -24,6 +30,10 @@ public class Convenio extends Beneficio {
         this.porcentajeDescuento = porcentajeDescuento;
     }
 
+    /**
+     * Metodo para aplicar el beneficio
+     * @param valorBase de la entrada.
+     */
     @Override
     public double aplicarBeneficio(double valorBase) {
         if (valorBase <= 0) {
@@ -34,7 +44,6 @@ public class Convenio extends Beneficio {
         return Math.max(0.0, valorFinal);
     }
 
-    // Getters y Setters
     public String getNombreEntidad() {
         return nombreEntidad;
     }

@@ -24,13 +24,13 @@ public class Funcion {
 
     /**
      * Metodo constructor de la clase funcion
-     * @param codigoFuncion de la clase funcion
-     * @param pelicula de la clase funcion
-     * @param sala de la clase funcion
-     * @param fecha de la clase funcion
-     * @param hora de la clase funcion
-     * @param valorEntrada de la clase funcion
-     * @param asiento de la clase duncion
+     * @param codigoFuncion codigo de la clase funcion
+     * @param pelicula pelicula de la clase funcion
+     * @param sala sala de la clase funcion
+     * @param fecha fecha de la clase funcion
+     * @param hora hora de la clase funcion
+     * @param valorEntrada  valor de entrada de la clase funcion
+     * @param asiento asiento de la clase duncion
      */
     public Funcion(String codigoFuncion, Pelicula pelicula, Sala sala, LocalDate fecha,
                    LocalTime hora, double valorEntrada, String asiento) {
@@ -67,6 +67,10 @@ public class Funcion {
         return this.codigoFuncion != null && !this.codigoFuncion.trim().isEmpty() && this.estadoFuncion != null;
     }
 
+    /**
+     * Metodo para agregaar una venta
+     * @param venta agregar una venta
+     */
     public void agregarVenta(VentaEntrada venta) {
         if (this.listFuncionVentaEntradas == null) {
             this.listFuncionVentaEntradas = new ArrayList<>();
@@ -74,7 +78,6 @@ public class Funcion {
         this.listFuncionVentaEntradas.add(venta);
     }
 
-    // Getters y Setters
     public String getCodigoFuncion() {
         return codigoFuncion;
     }

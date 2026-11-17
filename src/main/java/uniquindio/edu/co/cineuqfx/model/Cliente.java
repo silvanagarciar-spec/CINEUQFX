@@ -2,9 +2,6 @@ package uniquindio.edu.co.cineuqfx.model;
 
 import java.util.List;
 
-/**
- * Representa a un cliente registrado en el sistema de cine CINEMAUQ.
- */
 public class Cliente {
     private String identificacion;
     private String nombre;
@@ -12,12 +9,11 @@ public class Cliente {
     private Beneficio beneficio;
 
     /**
-     * Constructor de la clase Cliente con beneficio asignado.
-     *
+     * Metodo constructor de la clase Cliente con beneficio asignado.
      * @param identificacion Número de identificación del cliente.
      * @param nombre         Nombre completo del cliente.
      * @param tipoCliente    Categoría o tipo de cliente.
-     * @param beneficio      Beneficio asociado al cliente.
+     * @param beneficio      Beneficio asociado al cliente
      */
     public Cliente(String identificacion, String nombre, TipoCliente tipoCliente, Beneficio beneficio) {
         this.identificacion = identificacion;
@@ -27,7 +23,7 @@ public class Cliente {
     }
 
     /**
-     * Constructor de la clase Cliente sin beneficio inicial.
+     * Metodo Constructor de la clase Cliente sin beneficio inicial.
      *
      * @param identificacion Número de identificación del cliente.
      * @param nombre         Nombre completo del cliente.
@@ -39,7 +35,7 @@ public class Cliente {
 
 
     /**
-     * Calcula el valor aplicando el beneficio del cliente si tiene uno asignado.
+     * Metodo para Calcular el valor aplicando el beneficio del cliente si tiene uno asignado.
      *
      * @param valorBase Valor base sobre el cual se aplica el beneficio.
      * @return Valor final después de aplicar el beneficio, o el valor base si no tiene.
@@ -53,7 +49,7 @@ public class Cliente {
 
 
     /**
-     * Verifica si el cliente ya está registrado en la lista.
+     * Metodo para Verificar si el cliente ya está registrado en la lista.
      *
      * @param clientes Lista de clientes registrados.
      * @return true si el cliente existe en la lista, false en caso contrario.
@@ -71,7 +67,7 @@ public class Cliente {
     }
 
     /**
-     * Registra el cliente si aún no existe; si ya está registrado lanza excepción.
+     * Metodo para Registrar el cliente si aún no existe; si ya está registrado lanza excepción.
      *
      * @param clientes Lista de clientes registrados.
      * @return
@@ -88,7 +84,7 @@ public class Cliente {
     }
 
     /**
-     * Elimina el cliente de la lista si existe; de lo contrario lanza excepción.
+     * Metodo para Eliminar el cliente de la lista si existe; de lo contrario lanza excepción.
      *
      * @param clientes Lista de clientes registrados.
      */
@@ -106,7 +102,7 @@ public class Cliente {
     }
 
     /**
-     * Cambia o asciende el tipo de cliente.
+     * Metodo que cambia o asciende el tipo de cliente.
      *
      * @param nuevoTipo Nuevo tipo de cliente asignado.
      */
@@ -116,83 +112,46 @@ public class Cliente {
         }
     }
 
-    // Getters y Setters
 
-    /**
-     * Obtiene la identificación del cliente.
-     *
-     * @return Identificación del cliente.
-     */
     public String getIdentificacion() {
         return identificacion;
     }
 
-    /**
-     * Establece la identificación del cliente.
-     *
-     * @param identificacion Nueva identificación del cliente.
-     */
+
     public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
 
-    /**
-     * Obtiene el nombre del cliente.
-     *
-     * @return Nombre del cliente.
-     */
+
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Establece el nombre del cliente.
-     *
-     * @param nombre Nuevo nombre del cliente.
-     */
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Obtiene el tipo de cliente.
-     *
-     * @return Tipo de cliente.
-     */
+
     public TipoCliente getTipoCliente() {
         return tipoCliente;
     }
 
-    /**
-     * Establece el tipo de cliente.
-     *
-     * @param tipoCliente Nuevo tipo de cliente.
-     */
+
     public void setTipoCliente(TipoCliente tipoCliente) {
         this.tipoCliente = tipoCliente;
     }
 
-    /**
-     * Obtiene el beneficio asociado al cliente.
-     *
-     * @return Beneficio del cliente.
-     */
     public Beneficio getBeneficio() {
         return beneficio;
     }
 
-    /**
-     * Establece el beneficio asociado al cliente.
-     *
-     * @param beneficio Nuevo beneficio del cliente.
-     */
+
     public void setBeneficio(Beneficio beneficio) {
         this.beneficio = beneficio;
     }
 
-    /**
-     * Devuelve una descripción legible del beneficio asignado al cliente.
-     */
+
     public String getDescripcionBeneficio() {
         if (beneficio == null) {
             return "Ninguno";

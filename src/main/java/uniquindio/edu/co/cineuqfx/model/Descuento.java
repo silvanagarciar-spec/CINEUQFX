@@ -1,12 +1,18 @@
 package uniquindio.edu.co.cineuqfx.model;
 
-/**
- * Beneficio de tipo Descuento por promociones especiales (miércoles de cine, martes estudiante, cumpleaños, etc.).
- */
+
 public class Descuento extends Beneficio {
+
     private double porcentajeDescuento;
     private MotivoDescuento motivo;
 
+    /**
+     * metodo constructor de la clase descuento
+     * @param codigoBeneficio codigo del beneficio
+     * @param nombreBeneficio nombre del beneficio
+     * @param porcentajeDescuento porcentage del beneficio
+     * @param motivo del descuento
+     */
     public Descuento(int codigoBeneficio, String nombreBeneficio, double porcentajeDescuento, MotivoDescuento motivo) {
         super(codigoBeneficio, nombreBeneficio);
         if (porcentajeDescuento < 0 || porcentajeDescuento > 100) {
@@ -20,12 +26,20 @@ public class Descuento extends Beneficio {
     }
 
     /**
-     * Constructor con porcentaje por defecto según el motivo.
+     * metodo para descuento
+     * @param codigoBeneficio codigo para el beneficio
+     * @param nombreBeneficio nombre del beneficio
+     * @param motivo del descuento
      */
     public Descuento(int codigoBeneficio, String nombreBeneficio, MotivoDescuento motivo) {
         this(codigoBeneficio, nombreBeneficio, obtenerPorcentajePorDefecto(motivo), motivo);
     }
 
+    /**
+     * Metodo para obtener porcentaje
+     * @param motivo del porcentaje
+     * @return
+     */
     private static double obtenerPorcentajePorDefecto(MotivoDescuento motivo) {
         if (motivo == null) {
             throw new BeneficioNoValidoException("El motivo no puede ser nulo.");
@@ -37,6 +51,11 @@ public class Descuento extends Beneficio {
         };
     }
 
+    /**
+     * metodo para aplicaar el beneficio
+     * @param valorBase valor base de la entrada.
+     * @return
+     */
     @Override
     public double aplicarBeneficio(double valorBase) {
         if (valorBase <= 0) {
@@ -47,7 +66,6 @@ public class Descuento extends Beneficio {
         return Math.max(0.0, valorFinal);
     }
 
-    // Getters y Setters
     public double getPorcentajeDescuento() {
         return porcentajeDescuento;
     }
