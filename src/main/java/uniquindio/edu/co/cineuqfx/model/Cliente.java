@@ -74,15 +74,17 @@ public class Cliente {
      * Registra el cliente si aún no existe; si ya está registrado lanza excepción.
      *
      * @param clientes Lista de clientes registrados.
+     * @return
      */
-    public void registrarCliente(List<Cliente> clientes) {
+    public boolean registrarCliente(List<Cliente> clientes) {
         if (clientes == null) {
-            return;
+            return false;
         }
         if (verificarCliente(clientes)) {
             throw new ClienteYaRegistradoException("El cliente con identificación " + this.identificacion + " ya está registrado.");
         }
         clientes.add(this);
+        return false;
     }
 
     /**
