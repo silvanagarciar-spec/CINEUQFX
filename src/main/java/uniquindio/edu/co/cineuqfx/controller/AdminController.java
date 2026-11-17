@@ -5,20 +5,20 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.util.StringConverter;
 import uniquindio.edu.co.cineuqfx.Alertas;
 import uniquindio.edu.co.cineuqfx.AppContext;
 import uniquindio.edu.co.cineuqfx.Navegador;
 import uniquindio.edu.co.cineuqfx.model.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
- * Pantalla del administrador: gestiona películas y salas.
+ * Pantalla del administrador: gestiona películas, salas y funciones.
  * Este controlador NO tiene lógica de negocio: lee los campos, llama a CinemaUq
  * (carpeta model) y muestra el resultado.
  */
@@ -59,6 +59,25 @@ public class AdminController {
     @FXML private TableColumn<Sala, String> colSalaAsientos;
     @FXML private TableColumn<Sala, String> colSalaTipo;
     @FXML private TableColumn<Sala, String> colSalaEstado;
+
+    /**
+     * Funciones
+     */
+    @FXML private TextField txtFunCodigo;
+    @FXML private ComboBox<Pelicula> cmbFunPelicula;
+    @FXML private ComboBox<Sala> cmbFunSala;
+    @FXML private DatePicker dpFunFecha;
+    @FXML private TextField txtFunHora;
+    @FXML private TextField txtFunPrecio;
+    @FXML private ComboBox<EstadoFuncion> cmbFunEstado;
+    @FXML private TableView<Funcion> tablaFunciones;
+    @FXML private TableColumn<Funcion, String> colFunCodigo;
+    @FXML private TableColumn<Funcion, String> colFunPelicula;
+    @FXML private TableColumn<Funcion, String> colFunSala;
+    @FXML private TableColumn<Funcion, String> colFunFecha;
+    @FXML private TableColumn<Funcion, String> colFunHora;
+    @FXML private TableColumn<Funcion, String> colFunPrecio;
+    @FXML private TableColumn<Funcion, String> colFunEstado;
 
     /** JavaFX llama a este método solo, una vez cargado el FXML. */
     @FXML
@@ -107,8 +126,66 @@ public class AdminController {
             }
         });
 
+        /**
+         * Tabla de funciones
+         */
+        colFunCodigo.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getCodigoFuncion()));
+        colFunPelicula.setCellValueFactory(c -> new SimpleStringProperty(
+                c.getValue().getPelicula() != null ? c.getValue().getPelicula().getNombrePelicula() : "N/A"));
+        colFunSala.setCellValueFactory(c -> new SimpleStringProperty(
+                c.getValue().getSala() != null ? c.getValue().getSala().getNombreSala() : "N/A"));
+        colFunFecha.setCellValueFactory(c -> new SimpleStringProperty(
+                c.getValue().getFecha() != null ? c.getValue().getFecha().toString() : ""));
+        colFunHora.setCellValueFactory(c -> new SimpleStringProperty(
+                c.getValue().getHora() != null ? c.getValue().getHora().toString() : ""));
+        colFunPrecio.setCellValueFactory(c -> new SimpleStringProperty(String.format("$%,.0f", c.getValue().getValorEntrada())));
+        colFunEstado.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getEstadoFuncion())));
+
+        configurarCombosFuncion();
+
+        tablaFunciones.getSelectionModel().selectedItemProperty().addListener((obs, anterior, f) -> {
+            if (f != null) {
+                txtFunCodigo.setText(f.getCodigoFuncion());
+                txtFunCodigo.setDisable(true);
+                cmbFunPelicula.setValue(f.getPelicula());
+                cmbFunSala.setValue(f.getSala());
+                dpFunFecha.setValue(f.getFecha());
+                txtFunHora.setText(f.getHora() != null ? f.getHora().toString() : "");
+                txtFunPrecio.setText(String.valueOf(f.getValorEntrada()));
+                cmbFunEstado.setValue(f.getEstadoFuncion());
+            }
+        });
+
         refrescarPeliculas();
         refrescarSalas();
+        refrescarFunciones();
+    }
+
+    private void configurarCombosFuncion() {
+        cmbFunEstado.setItems(FXCollections.observableArrayList(EstadoFuncion.values()));
+        cmbFunEstado.setValue(EstadoFuncion.PROGRAMADA);
+
+        cmbFunPelicula.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Pelicula p) {
+                return p == null ? "" : p.getNombrePelicula() + " [" + p.getGenero() + "]";
+            }
+            @Override
+            public Pelicula fromString(String string) {
+                return null;
+            }
+        });
+
+        cmbFunSala.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Sala s) {
+                return s == null ? "" : s.getNombreSala() + " (" + s.getTipoSala() + ")";
+            }
+            @Override
+            public Sala fromString(String string) {
+                return null;
+            }
+        });
     }
 
     /**
@@ -194,6 +271,7 @@ public class AdminController {
     private void refrescarPeliculas() {
         tablaPeliculas.setItems(FXCollections.observableArrayList(cine.getListCineUqPeliculas()));
         tablaPeliculas.refresh();
+        cmbFunPelicula.setItems(FXCollections.observableArrayList(cine.consultarPeliculasDisponibles()));
     }
 
     /**
@@ -211,8 +289,14 @@ public class AdminController {
             if (tipo == null) {
                 throw new IllegalArgumentException("Selecciona un tipo de sala.");
             }
-            cine.registrarSala(new Sala(codigo, nombre, capacidad, asientos,
-                    EstadoSala.DISPONIBLE, tipo, new ArrayList<>()));
+            Sala nuevaSala = new Sala(codigo, nombre, capacidad, 0,
+                    EstadoSala.DISPONIBLE, tipo, new ArrayList<>());
+            // Generar los asientos de la sala automáticamente según capacidad o filas
+            int filas = Math.max(1, asientos / 10);
+            int cols = Math.max(1, (int) Math.ceil((double) asientos / filas));
+            AppContext.generarAsientos(nuevaSala, filas, cols);
+
+            cine.registrarSala(nuevaSala);
             refrescarSalas();
             onLimpiarSala();
             Alertas.info("Sala registrada correctamente.");
@@ -280,6 +364,82 @@ public class AdminController {
     private void refrescarSalas() {
         tablaSalas.setItems(FXCollections.observableArrayList(cine.getListCineUqSalas()));
         tablaSalas.refresh();
+        cmbFunSala.setItems(FXCollections.observableArrayList(cine.getListCineUqSalas()));
+    }
+
+    /**
+     * FUNCIONES
+     */
+
+    @FXML
+    private void onRegistrarFuncion() {
+        try {
+            String codigo = leerTexto(txtFunCodigo, "El código de la función");
+            if (Funcion.verificarFuncionExiste(codigo, cine.getListCineUqFunciones())) {
+                throw new IllegalArgumentException("Ya existe una función con el código: " + codigo);
+            }
+            Pelicula pelicula = cmbFunPelicula.getValue();
+            if (pelicula == null) {
+                throw new IllegalArgumentException("Selecciona una película disponible.");
+            }
+            Sala sala = cmbFunSala.getValue();
+            if (sala == null) {
+                throw new IllegalArgumentException("Selecciona una sala.");
+            }
+            LocalDate fecha = dpFunFecha.getValue();
+            if (fecha == null) {
+                throw new IllegalArgumentException("Selecciona una fecha.");
+            }
+            LocalTime hora = leerHora(txtFunHora, "La hora (formato HH:mm, ej. 18:30)");
+            double precio = leerDecimal(txtFunPrecio, "El valor de entrada");
+
+            Funcion funcion = new Funcion(codigo, pelicula, sala, fecha, hora, precio, "Estándar");
+            if (cmbFunEstado.getValue() != null) {
+                funcion.setEstadoFuncion(cmbFunEstado.getValue());
+            }
+
+            cine.agregarFuncion(funcion, pelicula.getCodigoPelicula(), sala.getCodigoSala());
+            refrescarFunciones();
+            onLimpiarFuncion();
+            Alertas.info("Función programada correctamente.");
+        } catch (Exception e) {
+            Alertas.error(e.getMessage());
+        }
+    }
+
+    @FXML
+    private void onCambiarEstadoFuncion() {
+        Funcion seleccionada = tablaFunciones.getSelectionModel().getSelectedItem();
+        if (seleccionada == null) {
+            Alertas.advertencia("Selecciona una función de la tabla.");
+            return;
+        }
+        EstadoFuncion nuevoEstado = cmbFunEstado.getValue();
+        if (nuevoEstado == null) {
+            Alertas.advertencia("Selecciona un estado en el selector.");
+            return;
+        }
+        seleccionada.setEstadoFuncion(nuevoEstado);
+        refrescarFunciones();
+        Alertas.info("Estado de la función actualizado a: " + nuevoEstado);
+    }
+
+    @FXML
+    private void onLimpiarFuncion() {
+        tablaFunciones.getSelectionModel().clearSelection();
+        txtFunCodigo.clear();
+        txtFunCodigo.setDisable(false);
+        cmbFunPelicula.setValue(null);
+        cmbFunSala.setValue(null);
+        dpFunFecha.setValue(null);
+        txtFunHora.clear();
+        txtFunPrecio.clear();
+        cmbFunEstado.setValue(EstadoFuncion.PROGRAMADA);
+    }
+
+    private void refrescarFunciones() {
+        tablaFunciones.setItems(FXCollections.observableArrayList(cine.getListCineUqFunciones()));
+        tablaFunciones.refresh();
     }
 
     /**
@@ -301,6 +461,30 @@ public class AdminController {
             return Integer.parseInt(texto);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(nombreCampo + " debe ser un número entero.");
+        }
+    }
+
+    private double leerDecimal(TextField campo, String nombreCampo) {
+        String texto = campo.getText().trim();
+        if (texto.isEmpty()) {
+            throw new IllegalArgumentException(nombreCampo + " es obligatorio.");
+        }
+        try {
+            return Double.parseDouble(texto);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(nombreCampo + " debe ser un número decimal válido.");
+        }
+    }
+
+    private LocalTime leerHora(TextField campo, String nombreCampo) {
+        String texto = campo.getText().trim();
+        if (texto.isEmpty()) {
+            throw new IllegalArgumentException(nombreCampo + " es obligatorio.");
+        }
+        try {
+            return LocalTime.parse(texto);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException(nombreCampo + " no tiene un formato válido (HH:mm, ej. 14:30 o 20:00).");
         }
     }
 

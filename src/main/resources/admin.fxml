@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -141,6 +142,63 @@
                                         <TableColumn fx:id="colSalaAsientos" text="Asientos" prefWidth="100.0"/>
                                         <TableColumn fx:id="colSalaTipo" text="Tipo" prefWidth="120.0"/>
                                         <TableColumn fx:id="colSalaEstado" text="Estado" prefWidth="150.0"/>
+                                    </columns>
+                                </TableView>
+                            </center>
+                        </BorderPane>
+                    </content>
+                </Tab>
+
+                <!-- ===================== FUNCIONES ===================== -->
+                <Tab text="Funciones">
+                    <content>
+                        <BorderPane>
+                            <padding>
+                                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                            </padding>
+                            <left>
+                                <VBox spacing="8.0" prefWidth="280.0" styleClass="panel">
+                                    <padding>
+                                        <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                                    </padding>
+                                    <BorderPane.margin>
+                                        <Insets right="16.0"/>
+                                    </BorderPane.margin>
+                                    <children>
+                                        <Label text="Programar Función" styleClass="seccion"/>
+                                        <Label text="Código de función"/>
+                                        <TextField fx:id="txtFunCodigo" promptText="ej. F01"/>
+                                        <Label text="Película disponible"/>
+                                        <ComboBox fx:id="cmbFunPelicula" maxWidth="Infinity" promptText="Seleccionar película"/>
+                                        <Label text="Sala"/>
+                                        <ComboBox fx:id="cmbFunSala" maxWidth="Infinity" promptText="Seleccionar sala"/>
+                                        <Label text="Fecha"/>
+                                        <DatePicker fx:id="dpFunFecha" maxWidth="Infinity"/>
+                                        <Label text="Hora (HH:mm)"/>
+                                        <TextField fx:id="txtFunHora" promptText="ej. 18:30"/>
+                                        <Label text="Valor entrada base ($)"/>
+                                        <TextField fx:id="txtFunPrecio" promptText="ej. 15000"/>
+                                        <Label text="Estado de función"/>
+                                        <ComboBox fx:id="cmbFunEstado" maxWidth="Infinity"/>
+                                        <Button text="Programar función" maxWidth="Infinity" styleClass="boton-primario"
+                                                onAction="#onRegistrarFuncion"/>
+                                        <Button text="Cambiar estado" maxWidth="Infinity" styleClass="boton-secundario"
+                                                onAction="#onCambiarEstadoFuncion"/>
+                                        <Button text="Limpiar campos" maxWidth="Infinity" styleClass="boton-secundario"
+                                                onAction="#onLimpiarFuncion"/>
+                                    </children>
+                                </VBox>
+                            </left>
+                            <center>
+                                <TableView fx:id="tablaFunciones">
+                                    <columns>
+                                        <TableColumn fx:id="colFunCodigo" text="Código" prefWidth="70.0"/>
+                                        <TableColumn fx:id="colFunPelicula" text="Película" prefWidth="200.0"/>
+                                        <TableColumn fx:id="colFunSala" text="Sala" prefWidth="120.0"/>
+                                        <TableColumn fx:id="colFunFecha" text="Fecha" prefWidth="100.0"/>
+                                        <TableColumn fx:id="colFunHora" text="Hora" prefWidth="80.0"/>
+                                        <TableColumn fx:id="colFunPrecio" text="Precio Base" prefWidth="100.0"/>
+                                        <TableColumn fx:id="colFunEstado" text="Estado" prefWidth="120.0"/>
                                     </columns>
                                 </TableView>
                             </center>

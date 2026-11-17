@@ -118,6 +118,91 @@
                     </content>
                 </Tab>
 
+                <!-- ================= VENTA DE ENTRADAS ================= -->
+                <Tab text="Venta de Entradas">
+                    <content>
+                        <BorderPane>
+                            <padding>
+                                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                            </padding>
+                            <center>
+                                <VBox spacing="14.0" maxWidth="600.0" maxHeight="-Infinity" styleClass="panel">
+                                    <padding>
+                                        <Insets top="24.0" right="28.0" bottom="24.0" left="28.0"/>
+                                    </padding>
+                                    <children>
+                                        <Label text="Taquilla - Registrar Venta de Boletos" styleClass="seccion"/>
+                                        
+                                        <Label text="Seleccionar Función:"/>
+                                        <ComboBox fx:id="cmbVentaFuncion" maxWidth="Infinity" promptText="Selecciona la función deseada"/>
+
+                                        <Label text="Seleccionar Cliente Registrado:"/>
+                                        <ComboBox fx:id="cmbVentaCliente" maxWidth="Infinity" promptText="Selecciona el cliente comprador"/>
+
+                                        <Label text="Seleccionar Asiento Disponible:"/>
+                                        <ComboBox fx:id="cmbVentaAsiento" maxWidth="Infinity" promptText="Elige el asiento"/>
+
+                                        <Label text="Método de Pago:"/>
+                                        <ComboBox fx:id="cmbVentaMetodoPago" maxWidth="Infinity" promptText="Selecciona método de pago"/>
+
+                                        <!-- Tarjeta de liquidación -->
+                                        <VBox spacing="6.0" style="-fx-background-color: #2a2a38; -fx-padding: 14; -fx-background-radius: 8;">
+                                            <children>
+                                                <Label text="Resumen de liquidación:" style="-fx-font-weight: bold; -fx-text-fill: #e50914;"/>
+                                                <Label fx:id="lblTarifaCliente" text="Tarifa según tipo cliente: $0"/>
+                                                <Label fx:id="lblTotalPagar" text="Total final a pagar: $0" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #2ecc71;"/>
+                                                <Label fx:id="lblInfoMetodo" text="" styleClass="pista" wrapText="true"/>
+                                            </children>
+                                        </VBox>
+
+                                        <Button text="🎟️ Procesar y Confirmar Venta" maxWidth="Infinity"
+                                                styleClass="boton-primario" onAction="#onRealizarVenta"/>
+                                    </children>
+                                </VBox>
+                            </center>
+                        </BorderPane>
+                    </content>
+                </Tab>
+
+                <!-- ================= HISTORIAL DE VENTAS ================= -->
+                <Tab text="Historial de Ventas">
+                    <content>
+                        <BorderPane>
+                            <padding>
+                                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                            </padding>
+                            <top>
+                                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                    <BorderPane.margin>
+                                        <Insets bottom="12.0"/>
+                                    </BorderPane.margin>
+                                    <children>
+                                        <Label text="Registro General de Ventas Realizadas" styleClass="seccion"/>
+                                        <Region HBox.hgrow="ALWAYS"/>
+                                        <Button text="Actualizar" styleClass="boton-secundario" onAction="#onActualizarVentas"/>
+                                        <Button text="Cancelar Venta Seleccionada" styleClass="boton-peligro" onAction="#onCancelarVenta"/>
+                                    </children>
+                                </HBox>
+                            </top>
+                            <center>
+                                <TableView fx:id="tablaVentas">
+                                    <columns>
+                                        <TableColumn fx:id="colVenCodigo" text="Código" prefWidth="90.0"/>
+                                        <TableColumn fx:id="colVenCliente" text="Cliente" prefWidth="180.0"/>
+                                        <TableColumn fx:id="colVenPelicula" text="Película" prefWidth="180.0"/>
+                                        <TableColumn fx:id="colVenSala" text="Sala" prefWidth="100.0"/>
+                                        <TableColumn fx:id="colVenAsiento" text="Asiento" prefWidth="80.0"/>
+                                        <TableColumn fx:id="colVenFecha" text="Fecha" prefWidth="95.0"/>
+                                        <TableColumn fx:id="colVenHora" text="Hora" prefWidth="80.0"/>
+                                        <TableColumn fx:id="colVenValor" text="Valor Pagado" prefWidth="110.0"/>
+                                        <TableColumn fx:id="colVenEstado" text="Estado" prefWidth="110.0"/>
+                                    </columns>
+                                </TableView>
+                            </center>
+                        </BorderPane>
+                    </content>
+                </Tab>
+
             </tabs>
         </TabPane>
     </center>
