@@ -78,10 +78,6 @@ public class Sala {
         this.nAsientos = this.listSalaAsientos.size();
     }
 
-    /**
-     * getters y setters de sala
-     * @return
-     */
     public int getCodigoSala() {
         return codigoSala;
     }

@@ -98,58 +98,36 @@ public class VentaEntrada {
         throw new VentaNoEncontradaException("No existe la venta: " + codigoVenta);
     }
 
-    /**
-     * Obtiene el código de la venta.
-     * @return Código de la venta.
-     */
+
     public String getCodigoVentaEntrada() {
         return codigoVentaEntrada;
     }
 
-    /**
-     * Establece el código de la venta.
-     * @param codigoVentaEntrada Nuevo código de venta.
-     */
+
     public void setCodigoVentaEntrada(String codigoVentaEntrada) {
         this.codigoVentaEntrada = codigoVentaEntrada;
     }
 
-    /**
-     * Obtiene la fecha de la venta.
-     * @return Fecha de la venta.
-     */
     public String getFechaVenta() {
         return fechaVenta;
     }
 
-    /**
-     * Establece la fecha de la venta.
-     * @param fechaVenta Nueva fecha de venta.
-     */
+
     public void setFechaVenta(String fechaVenta) {
         this.fechaVenta = fechaVenta;
     }
 
-    /**
-     * Obtiene la hora de la venta.
-     * @return Hora de la venta.
-     */
+
     public String getHoraVenta() {
         return horaVenta;
     }
 
-    /**
-     * Establece la hora de la venta.
-     * @param horaVenta Nueva hora de venta.
-     */
+
     public void setHoraVenta(String horaVenta) {
         this.horaVenta = horaVenta;
     }
 
-    /**
-     * Obtiene el valor pagado por la entrada.
-     * @return Valor pagado.
-     */
+
     public double getValorPagado() {
         return valorPagado;
     }
@@ -162,74 +140,46 @@ public class VentaEntrada {
         this.valorPagado = valorPagado;
     }
 
-    /**
-     * Obtiene el estado actual de la venta.
-     * @return Estado de la venta.
-     */
+
     public EstadoVenta getEstado() {
         return estado;
     }
 
-    /**
-     * Establece el estado de la venta.
-     * @param estado Nuevo estado de la venta.
-     */
+
     public void setEstado(EstadoVenta estado) {
         this.estado = estado;
     }
 
-    /**
-     * Obtiene el cliente asociado a la venta.
-     * @return Cliente de la venta.
-     */
+
     public Cliente getCliente() {
         return cliente;
     }
 
-    /**
-     * Establece el cliente asociado a la venta.
-     * @param cliente Nuevo cliente.
-     */
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    /**
-     * Obtiene el asiento asignado a la venta.
-     * @return Asiento de la venta.
-     */
+
     public Asiento getAsiento() {
         return asiento;
     }
 
-    /**
-     * Establece el asiento asignado a la venta.
-     * @param asiento Nuevo asiento.
-     */
+
     public void setAsiento(Asiento asiento) {
         this.asiento = asiento;
     }
 
-    /**
-     * Obtiene la función asociada a la venta.
-     * @return Función de la venta.
-     */
+
     public Funcion getFuncion() {
         return funcion;
     }
 
-    /**
-     * Establece la función asociada a la venta.
-     * @param funcion Nueva función.
-     */
     public void setFuncion(Funcion funcion) {
         this.funcion = funcion;
     }
 
-    /**
-     * Devuelve el resumen en texto de la venta de entrada.
-     * @return Cadena con los detalles principales de la venta.
-     */
+
     @Override
     public String toString() {
         return "Venta " + codigoVentaEntrada + " | " + cliente.getNombre() +

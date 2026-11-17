@@ -168,11 +168,7 @@ public class Cliente {
         return beneficio.getNombreBeneficio();
     }
 
-    /**
-     * Devuelve la representación en texto del cliente.
-     *
-     * @return Cadena con los datos del cliente.
-     */
+
     @Override
     public String toString() {
         return nombre + " (" + identificacion + ") - " + tipoCliente;
