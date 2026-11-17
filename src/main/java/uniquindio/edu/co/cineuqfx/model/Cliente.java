@@ -191,6 +191,25 @@ public class Cliente {
     }
 
     /**
+     * Devuelve una descripción legible del beneficio asignado al cliente.
+     */
+    public String getDescripcionBeneficio() {
+        if (beneficio == null) {
+            return "Ninguno";
+        }
+        if (beneficio instanceof Membresia m) {
+            return "Membresía " + m.getNivel() + " (" + m.getPuntosAcumulados() + " pts)";
+        }
+        if (beneficio instanceof Convenio c) {
+            return "Convenio " + c.getNombreEntidad() + " (" + String.format("%.0f%%", c.getPorcentajeDescuento()) + ")";
+        }
+        if (beneficio instanceof Descuento d) {
+            return "Descuento " + d.getMotivo() + " (" + String.format("%.0f%%", d.getPorcentajeDescuento()) + ")";
+        }
+        return beneficio.getNombreBeneficio();
+    }
+
+    /**
      * Devuelve la representación en texto del cliente.
      *
      * @return Cadena con los datos del cliente.

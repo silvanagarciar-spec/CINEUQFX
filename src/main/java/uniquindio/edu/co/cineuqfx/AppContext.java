@@ -84,9 +84,14 @@ public final class AppContext {
             throw new IllegalStateException("Error cargando datos de prueba", e);
         }
         try {
-            new Cliente("1001", "Ana Gómez", TipoCliente.ESTUDIANTE).registrarCliente(cine.getListCineUqCliente());
-            new Cliente("1002", "Carlos Pérez", TipoCliente.GENERAL).registrarCliente(cine.getListCineUqCliente());
-            new Cliente("1003", "Elena Ruiz", TipoCliente.ADULTO_MAYOR).registrarCliente(cine.getListCineUqCliente());
+            Beneficio bMembresia1 = new Membresia(101, "Membresía Oro", 150, NivelMembresia.ORO);
+            Beneficio bMembresia2 = new Membresia(103, "Membresía Plata", 1200, NivelMembresia.PLATA);
+            Beneficio bConvenio = new Convenio(102, "Convenio UQ", "Universidad del Quindío", TipoEntidad.UNIVERSIDAD, 20.0);
+
+            new Cliente("1001", "Ana Gómez", TipoCliente.ESTUDIANTE, bMembresia1).registrarCliente(cine.getListCineUqCliente());
+            new Cliente("1002", "Carlos Pérez", TipoCliente.GENERAL, bConvenio).registrarCliente(cine.getListCineUqCliente());
+            new Cliente("1003", "Elena Ruiz", TipoCliente.ADULTO_MAYOR, null).registrarCliente(cine.getListCineUqCliente());
+            new Cliente("1004", "Mateo Londoño", TipoCliente.GENERAL, bMembresia2).registrarCliente(cine.getListCineUqCliente());
         } catch (RuntimeException e) {
             throw new IllegalStateException("Error cargando datos de prueba", e);
         }

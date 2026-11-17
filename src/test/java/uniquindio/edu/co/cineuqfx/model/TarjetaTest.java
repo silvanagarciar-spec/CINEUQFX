@@ -14,14 +14,14 @@ class TarjetaTest {
 
         @BeforeEach
         void setUp() {
-            tarjeta = new Tarjeta(); // PAGO_MINIMO = 100000, recargo = 0.30
+            tarjeta = new Tarjeta(); // PAGO_MINIMO = 100000, recargo = 0.05
         }
 
         @Test
-        @DisplayName("TC-TJ-01: Recargo del 30% aplicado correctamente")
+        @DisplayName("TC-TJ-01: Recargo del 5% aplicado correctamente")
         void testCalcularValorFinalExitoso() throws SaldoInsuficienteException {
             double compra = 100000.0;
-            double esperado = 100000.0 + (100000.0 * 0.30); // 130000.0
+            double esperado = 100000.0 + (100000.0 * 0.05); // 105000.0
             assertEquals(esperado, tarjeta.calcularValorFinal(compra), 0.001);
         }
 

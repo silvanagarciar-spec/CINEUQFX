@@ -3,7 +3,7 @@ package uniquindio.edu.co.cineuqfx.model;
 public class Efectivo implements MetodoPago, IPagarValorTotal, IGenerarFactura {
 
     private static final int PAGO_MINIMO = 15000;
-    private double Descuento = 0.15;
+    private double Descuento = 0.09;
 
     public Efectivo() {
     }

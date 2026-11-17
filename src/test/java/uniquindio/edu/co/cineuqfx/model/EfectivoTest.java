@@ -14,14 +14,14 @@ import org.junit.jupiter.api.Test;
 
         @BeforeEach
         void setUp() {
-            efectivo = new Efectivo(); // PAGO_MINIMO = 15000, Descuento = 0.15
+            efectivo = new Efectivo(); // PAGO_MINIMO = 15000, Descuento = 0.09
         }
 
         @Test
-        @DisplayName("TC-EF-01: Descuento del 15% aplicado correctamente en compra válida")
+        @DisplayName("TC-EF-01: Descuento del 9% aplicado correctamente en compra válida")
         void testCalcularValorFinalExitoso() throws SaldoInsuficienteException {
             double compra = 20000.0;
-            double esperado = 20000.0 - (20000.0 * 0.15); // 17000.0
+            double esperado = 20000.0 - (20000.0 * 0.09); // 18200.0
             assertEquals(esperado, efectivo.calcularValorFinal(compra), 0.001);
         }
 

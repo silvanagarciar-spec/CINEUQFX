@@ -3,7 +3,7 @@ package uniquindio.edu.co.cineuqfx.model;
 public class Tarjeta implements MetodoPago, IPagarValorTotal, IGenerarFactura {
 
     private static final int PAGO_MINIMO = 100000;
-    private double recargo = 0.30;
+    private double recargo = 0.05;
 
     public Tarjeta() {
     }

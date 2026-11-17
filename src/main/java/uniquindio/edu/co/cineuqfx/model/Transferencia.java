@@ -3,7 +3,7 @@ package uniquindio.edu.co.cineuqfx.model;
 public class Transferencia implements MetodoPago, IGenerarFactura, IPagarValorTotal {
 
     private static final int PAGO_MINIMO = 50000;
-    private double recargo = 0.20;
+    private double recargo = 0.07;
 
     public Transferencia() {
     }

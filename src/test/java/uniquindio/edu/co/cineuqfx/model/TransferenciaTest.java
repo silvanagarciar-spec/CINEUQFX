@@ -14,14 +14,14 @@ import org.junit.jupiter.api.Test;
 
         @BeforeEach
         void setUp() {
-            transferencia = new Transferencia(); // PAGO_MINIMO = 50000, recargo = 0.20
+            transferencia = new Transferencia(); // PAGO_MINIMO = 50000, recargo = 0.07
         }
 
         @Test
-        @DisplayName("TC-TR-01: Recargo del 20% aplicado correctamente")
+        @DisplayName("TC-TR-01: Recargo del 7% aplicado correctamente")
         void testCalcularValorFinalExitoso() throws SaldoInsuficienteException {
             double compra = 50000.0;
-            double esperado = 50000.0 + (50000.0 * 0.20); // 60000.0
+            double esperado = 50000.0 + (50000.0 * 0.07); // 53500.0
             assertEquals(esperado, transferencia.calcularValorFinal(compra), 0.001);
         }
 
