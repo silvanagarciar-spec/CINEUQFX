@@ -25,6 +25,7 @@ public class Pelicula {
         this.genero = genero;
         this.duracionMinutos = duracionMinutos;
         this.clasificacionPelicula = clasificacionPelicula;
+<<<<<<< HEAD
         this.estadoPelicula = EstadoPelicula.DISPONIBLE;
         this.listSalaPelicula = new ArrayList<>();
     }
@@ -69,14 +70,29 @@ public class Pelicula {
      * Cambia el estado de la película a DISPONIBLE.
      */
     public void habilitar() {
+=======
+>>>>>>> 9768abd08fa1cf074dabf8ab83811ca2d7e57e18
         this.estadoPelicula = EstadoPelicula.DISPONIBLE;
+        this.listSalaPelicula = new ArrayList<>();
     }
 
     /**
-     * Verifica si la película está disponible.
+     * Filtra y retorna la lista de películas que tienen estado DISPONIBLE.
+     *
+     * @param peliculas Lista completa de películas.
+     * @return Lista de películas disponibles.
      */
-    public boolean estaDisponible() {
-        return this.estadoPelicula == EstadoPelicula.DISPONIBLE;
+    public static List<Pelicula> visualizarPeliculasDisponibles(List<Pelicula> peliculas) {
+        List<Pelicula> disponibles = new ArrayList<>();
+        if (peliculas == null || peliculas.size() == 0) {
+            return disponibles;
+        }
+        for (int i = 0; i < peliculas.size(); i++) {
+            if (peliculas.get(i).getEstadoPelicula() == EstadoPelicula.DISPONIBLE) {
+                disponibles.add(peliculas.get(i));
+            }
+        }
+        return disponibles;
     }
 
     // Getters y Setters
